@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETA Logs</title>
+    <style>
+        nav {
+            background-color: lightgray;
+            padding: 10px;
+        }
+        nav a {
+            color: black;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="eta_form.html">ETA Form</a>
+        <a href="eta_logs.html">ETA Logs</a>
+        <a href="eta_dashboard.html">ETA Dashboard</a>
+    </nav>
+
+    <h1>ETA Logs</h1>
+    <table id="etaTable">
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>Driver ID</th>
+                <th>Order ID</th>
+                <th>Timestamp</th>
+                <th>Current Lat</th>
+                <th>Current Lng</th>
+                <th>Dropoff Lat</th>
+                <th>Dropoff Lng</th>
+                <th>ETA (Minutes)</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+   <script>
+    fetch("http://127.0.0.1:5001/eta_logs")
+    .then(response => response.json())
+    .then(data => {
+        const tbody = document.querySelector("#etaTable tbody");
+        tbody.innerHTML = ""; // clear old data
+        data.forEach(row => {
+            const tr = document.createElement("tr");
+            row.forEach(cell => {
+                const td = document.createElement("td");
+                td.textContent = cell; // already formatted from Flask
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+    })
+    .catch(error => console.error("Error fetching ETA logs:", error));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ETA Dashboard</title>
+    <style>
+        nav {
+            background-color: lightgray;
+            padding: 10px;
+        }
+        nav a {
+            color: black;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        iframe {
+            width: 100%;
+            height: 90vh;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="eta_form.html">ETA Form</a>
+        <a href="eta_logs.html">ETA Logs</a>
+        <a href="eta_dashboard.html">ETA Dashboard</a>
+    </nav>
+
+    <h1>ETA Dashboard</h1>
+
+    <iframe src="http://localhost:3000/public/dashboard/0701f1f0-425d-4eaf-bd42-983211ce784f" 
+            title="Metabase ETA Dashboard"></iframe>
+</body>
+</html>

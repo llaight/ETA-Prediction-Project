@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delivery ETA Prediction</title>
+    <style>
+        nav {
+            background-color: lightgray;
+            padding: 10px;
+        }
+        nav a {
+            color: black;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="eta_form.html">ETA Form</a>
+        <a href="eta_logs.html">ETA Logs</a>
+        <a href="eta_dashboard.html">ETA Dashboard</a>
+    </nav>
+
+    <h1>Delivery ETA Prediction</h1>
+
+    <form id="etaForm">
+        <label>Driver ID:</label>
+        <input type="text" id="driver_id" required><br><br>
+
+        <label>Order ID:</label>
+        <input type="text" id="order_id" required><br><br>
+
+        <label>Current Address:</label>
+        <input type="text" id="current_address" required><br><br>
+
+        <label>Dropoff Address:</label>
+        <input type="text" id="dropoff_address" required><br><br>
+
+        <button type="submit">Get ETA</button>
+    </form>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("etaForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const data = {
+                driver_id: document.getElementById("driver_id").value,
+                order_id: document.getElementById("order_id").value,
+                current_location: document.getElementById("current_address").value,
+                dropoff_location: document.getElementById("dropoff_address").value
+            };
+
+            fetch("http://127.0.0.1:5001/predict_eta", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById("result").innerHTML = 
+                    `ETA: ${result.eta_minutes} minutes<br>Message: ${result.message}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerHTML = "Error getting ETA.";
+            });
+        });
+    </script>
+</body>
+</html>
