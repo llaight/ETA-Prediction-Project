@@ -9,7 +9,7 @@ A full-stack project for **predicting delivery estimated time of arrival (ETA)**
 - 🛠️ **Flask API** for ETA prediction and logging delivery data  
 - 🗄️ **PostgreSQL** database to store ETA logs including driver and order info  
 - 🌐 Simple frontend HTML pages for submitting delivery requests and viewing logs  
-- 📊 Optional integration with Metabase for analytics and dashboarding
+- 📊 Integration with Metabase for analytics and dashboarding
 
 ---
 
