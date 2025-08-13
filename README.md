@@ -75,7 +75,7 @@ delivery-eta-prediction/
 | dropoff_lng     | Longitude of dropoff location           |
 | eta_minutes     | Predicted estimated time in minutes   |
 | status_message  | ETA status ("Arrived", "En route", etc.) |
-| created_at      | Timestamp of prediction/log entry      |
+| ts              | Timestamp of prediction/log entry      |
 
 ---
 
